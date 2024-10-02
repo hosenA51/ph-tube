@@ -15,6 +15,7 @@ const removeActiveClass = () => {
         btn.classList.remove("active");
     }
 };
+
 //1- Fetch, Load and show Categories on html
 // Create loadCategories
 const loadCategories = () => {
@@ -48,7 +49,30 @@ const loadCategoryVideos= (id) => {
             displayVideos(data.category);
         })
         .catch((error) => console.log(error));
-}
+};
+
+const loadDetails = async (videoId) => {
+    console.log(videoId);
+    const uri = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
+    const res = await fetch(uri);
+    const data = await res.json();
+    displayDetails(data.video)
+};
+const displayDetails = (video) => {
+    console.log(video);
+    const detailContainer = document.getElementById("modal-content");
+
+    detailContainer.innerHTML = `
+    <img src=${video.thumbnail} />
+    <p>${video.description}</p>
+    `
+
+    // way-1
+    // document.getElementById("showModalData").click();
+
+    // way-2
+    document.getElementById("customModal").showModal();
+};
 
 // const cardDemo = {
 //     "category_id": "1001",
@@ -89,7 +113,7 @@ const displayVideos = (videos) => {
     }
 
     videos.forEach((video) => {
-        console.log(video);
+        // console.log(video);
         const card = document.createElement("div");
         card.classList = "card card-compact"
         card.innerHTML = `
@@ -119,7 +143,7 @@ const displayVideos = (videos) => {
 
                 </div>
                 
-                <p></p>
+                <p><button onclick="loadDetails('${video.video_id}')" class="btn btn-sm btn-error">details</button></p>
             </div>
         </div>
         `;
