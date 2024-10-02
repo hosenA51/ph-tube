@@ -101,7 +101,7 @@ const displayVideos = (videos) => {
         videoContainer.classList.remove('grid');
         videoContainer.innerHTML = `
         <div class="min-h-[300px] flex flex-col gap-5 justify-center items-center">
-          <img src="assets/icon.png" />
+          <img src="assets/Icon.png" />
           <h2 class="text-center text-xl font-bold">
           Oops!! Sorry, There is no content here
           </h2>
